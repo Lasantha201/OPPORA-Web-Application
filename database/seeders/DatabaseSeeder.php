@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Listing;
-use Illuminate\Database\Seeder;
 use Termwind\Components\Li;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,9 +17,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(5)->create();
+        //User::factory(5)->create();
+      $user =user::factory()->create([
 
-        Listing::factory(6)->create();
+        'name' => 'John Doe',
+        'email'=> 'john@gmail.com'
+
+
+      ]);
+        Listing::factory(6)->state([
+    'user_id' => $user->id
+])->create();
 
       //  Listing::create(
     //        [
